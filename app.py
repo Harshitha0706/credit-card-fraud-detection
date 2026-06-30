@@ -3,13 +3,13 @@ import pandas as pd
 import numpy as np
 import joblib
 
-# ---------------- PAGE CONFIG ----------------
+# page congig
 st.set_page_config(
     page_title="Credit Card Fraud Detection",
     layout="wide"
 )
 
-# ---------------- LOAD MODEL ----------------
+# Load Model
 @st.cache_resource
 def load_model():
     return joblib.load("fraud_detection_model.pkl")
@@ -17,14 +17,14 @@ def load_model():
 model = load_model()
 FEATURES = list(model.feature_names_in_)
 
-# ---------------- TITLE ----------------
+# Title 
 st.title("💳 Credit Card Fraud Detection System")
 st.markdown("""
 This dashboard predicts whether a transaction is **Fraudulent** or **Genuine**
 using a trained **XGBoost Machine Learning model**.
 """)
 
-# ---------------- SIDEBAR ----------------
+# Sidebar
 st.sidebar.header("Upload Transaction Data")
 uploaded_file = st.sidebar.file_uploader(
     "Upload CSV file (same format as dataset)",
@@ -39,7 +39,7 @@ threshold = st.sidebar.slider(
     step=0.05
 )
 
-# ---------------- BATCH PREDICTION ----------------
+# Batch Prediction
 if uploaded_file:
     data = pd.read_csv(uploaded_file)
 
@@ -78,7 +78,7 @@ if uploaded_file:
 else:
     st.info("👈 Upload a CSV file to start predictions")
 
-# ---------------- SINGLE TRANSACTION ----------------
+# Single Transaction
 st.markdown("---")
 st.subheader("🧪 Test a Single Transaction")
 
